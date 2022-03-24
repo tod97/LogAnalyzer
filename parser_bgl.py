@@ -1,3 +1,7 @@
+""" 
+    Use this parser to produce the log_structured starting from a raw BGL log file
+"""
+
 from logparser import Drain, AEL
 dataset_path = './'
 input_dir  = dataset_path + 'loghub/BGL/'  # The input directory of log file

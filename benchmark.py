@@ -4,12 +4,14 @@ import pandas as pd
 from loglizer.models import *
 from loglizer import dataloader, preprocessing
 
-run_models = ['PCA', 'InvariantsMiner', 'LogClustering', 'IsolationForest', 'LR', 
-              'SVM', 'DecisionTree']
+run_models = ['DecisionTree', 'DeepLog', 'InvariantsMiner', 'IsolationForest', 'LogClustering', 'LR', 'PCA', 'SVM']
 struct_log = './loghub/HDFS/HDFS_100k.log_structured.csv' # The benchmark dataset
+label_file = './loghub/HDFS/anomaly_label.csv' # The anomaly label file
 
-(x_tr, y_train), (x_te, y_test) = dataloader.load_HDFS(struct_log, window='session', train_ratio=0.5, split_type='uniform')
+(x_tr, y_train), (x_te, y_test) = dataloader.load_HDFS(struct_log, label_file=label_file, window='session', train_ratio=0.5, split_type='uniform')
 benchmark_results = []
+train_results = []
+test_results = []
 for _model in run_models:
     print('Evaluating {} on HDFS:'.format(_model))
     if _model == 'PCA':
@@ -34,8 +36,7 @@ for _model in run_models:
     elif _model == 'IsolationForest':
         feature_extractor = preprocessing.FeatureExtractor()
         x_train = feature_extractor.fit_transform(x_tr)
-        model = IsolationForest(random_state=2019, max_samples=0.9999, contamination=0.03, 
-                                n_jobs=4)
+        model = IsolationForest(random_state=2019, max_samples=0.9999, contamination=0.03, n_jobs=4)
         model.fit(x_train)
 
     elif _model == 'LR':
@@ -60,9 +61,14 @@ for _model in run_models:
     print('Train accuracy:')
     precision, recall, f1 = model.evaluate(x_train, y_train)
     benchmark_results.append([_model + '-train', precision, recall, f1])
+    train_results.append([_model, precision, recall, f1])
     print('Test accuracy:')
     precision, recall, f1 = model.evaluate(x_test, y_test)
     benchmark_results.append([_model + '-test', precision, recall, f1])
+    test_results.append([_model, precision, recall, f1])
 
-pd.DataFrame(benchmark_results, columns=['Model', 'Precision', 'Recall', 'F1']) \
-    .to_csv('benchmark_result.csv', index=False)
+print('====== Train Results ======')
+print(pd.DataFrame(train_results, columns=['Model', 'Precision', 'Recall', 'F1']))
+print('\n====== Test Results ======')
+print(pd.DataFrame(test_results, columns=['Model', 'Precision', 'Recall', 'F1']))
+#pd.DataFrame(benchmark_results, columns=['Model', 'Precision', 'Recall', 'F1']).to_csv('benchmark_result.csv', index=False)
