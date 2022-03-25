@@ -47,13 +47,14 @@ class Vectorizer(object):
 
 class FeatureExtractor(object):
 
-    def __init__(self):
+    def __init__(self, verbose=False):
         self.idf_vec = None
         self.mean_vec = None
         self.events = None
         self.term_weighting = None
         self.normalization = None
         self.oov = None
+        self.verbose = verbose
 
     def fit_transform(self, X_seq, term_weighting=None, normalization=None, oov=False, min_count=1):
         """ Fit and transform the data matrix
@@ -70,7 +71,8 @@ class FeatureExtractor(object):
         -------
             X_new: The transformed data matrix
         """
-        print('====== Transformed train data summary ======')
+        if self.verbose:
+            print('====== Transformed train data summary ======')
         self.term_weighting = term_weighting
         self.normalization = normalization
         self.oov = oov
@@ -123,7 +125,8 @@ class FeatureExtractor(object):
             X[X != 0] = expit(X[X != 0])
         X_new = X
         
-        print('Train data shape: {}-by-{}\n'.format(X_new.shape[0], X_new.shape[1])) 
+        if self.verbose:
+            print('Train data shape: {}-by-{}\n'.format(X_new.shape[0], X_new.shape[1])) 
         return X_new
 
     def transform(self, X_seq):
@@ -138,7 +141,8 @@ class FeatureExtractor(object):
         -------
             X_new: The transformed data matrix
         """
-        print('====== Transformed test data summary ======')
+        if self.verbose:
+            print('====== Transformed test data summary ======')
         X_counts = []
         for i in range(X_seq.shape[0]):
             event_counts = Counter(X_seq[i])
@@ -163,6 +167,7 @@ class FeatureExtractor(object):
             X[X != 0] = expit(X[X != 0])
         X_new = X
 
-        print('Test data shape: {}-by-{}\n'.format(X_new.shape[0], X_new.shape[1])) 
+        if self.verbose:
+            print('Test data shape: {}-by-{}\n'.format(X_new.shape[0], X_new.shape[1])) 
 
         return X_new

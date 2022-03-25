@@ -17,7 +17,7 @@ from ..utils import metrics
 
 class InvariantsMiner(object):
 
-    def __init__(self, percentage=0.98, epsilon=0.5, longest_invarant=None, scale_list=[1,2,3]):
+    def __init__(self, percentage=0.98, epsilon=0.5, longest_invarant=None, scale_list=[1,2,3], verbose=False):
         """ The Invariants Mining model for anomaly detection
 
         Attributes
@@ -35,6 +35,7 @@ class InvariantsMiner(object):
         self.longest_invarant = longest_invarant
         self.scale_list = scale_list
         self.invariants_dict = None
+        self.verbose = verbose
 
     def fit(self, X):
         """
@@ -42,7 +43,8 @@ class InvariantsMiner(object):
         ---------
             X: ndarray, the event count matrix of shape num_instances-by-num_events
         """
-        print('====== Model summary ======')
+        if(self.verbose):
+            print('====== Model summary ======')
         invar_dim = self._estimate_invarant_space(X)
         self._invariants_search(X, invar_dim)
 
@@ -65,10 +67,12 @@ class InvariantsMiner(object):
         return y_pred
 
     def evaluate(self, X, y_true):
-        print('====== Evaluation summary ======')
+        if(self.verbose):
+            print('====== Evaluation summary ======')
         y_pred = self.predict(X)
         precision, recall, f1 = metrics(y_pred, y_true)
-        print('Precision: {:.3f}, recall: {:.3f}, F1-measure: {:.3f}\n'.format(precision, recall, f1))
+        if(self.verbose):
+            print('Precision: {:.3f}, recall: {:.3f}, F1-measure: {:.3f}\n'.format(precision, recall, f1))
         return precision, recall, f1
 
     def _estimate_invarant_space(self, X):
@@ -94,7 +98,8 @@ class InvariantsMiner(object):
             if zero_count / float(num_instances) < self.percentage:
                 break
             r += 1
-        print('Invariant space dimension: {}'.format(r))
+        if(self.verbose):
+            print('Invariant space dimension: {}'.format(r))
 
         return r
 
@@ -155,7 +160,8 @@ class InvariantsMiner(object):
             if FLAG_break_loop:
                 break
             length += 1
-        print('Mined {} invariants: {}\n'.format(len(invariants_dict), invariants_dict))
+        if(self.verbose):
+            print('Mined {} invariants: {}\n'.format(len(invariants_dict), invariants_dict))
         self.invariants_dict = invariants_dict
 
     def _compute_eigenvector(self, X):
