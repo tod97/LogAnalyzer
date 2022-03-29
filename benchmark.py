@@ -66,11 +66,11 @@ model_evaluate('SVM', model, x_te, y_test, x_train, y_train)
 
 #_model = 'MLP'
 x_train = feature_extractor.fit_transform(x_tr, term_weighting='tf-idf')
-model = MLP()
+model = MLP(solver='adam')
 model.fit(x_train, y_train)
 model_evaluate('MLP', model, x_te, y_test, x_train, y_train)
 
-#_model = 'MLP'
+#_model = 'Nearest Neighbors'
 x_train = feature_extractor.fit_transform(x_tr, term_weighting='tf-idf')
 model = NearestN(n_neighbors=100)
 model.fit(x_train, y_train)
