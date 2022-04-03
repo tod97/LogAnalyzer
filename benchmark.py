@@ -66,7 +66,7 @@ model_evaluate('SVM', model, x_te, y_test, x_train, y_train)
 
 #_model = 'MLP'
 x_train = feature_extractor.fit_transform(x_tr, term_weighting='tf-idf')
-model = MLP(solver='adam')
+model = MLP(solver='adam', max_iter=1000)
 model.fit(x_train, y_train)
 model_evaluate('MLP', model, x_te, y_test, x_train, y_train)
 

@@ -6,10 +6,10 @@ from logparser import Drain, AEL
 dataset_path = './'
 input_dir  = dataset_path + 'loghub/HDFS/'  # The input directory of log file
 output_dir = dataset_path = 'loghub/HDFS/'  # The output directory of parsing results
-log_file   = 'HDFS_2k.log'  # The input log file name
+log_file   = 'HDFS_100m.log'  # The input log file name
 log_format = '<Date> <Time> <Pid> <Level> <Component>: <Content>'  # HDFS log format
 
-""" # Regular expression list for optional preprocessing (default: [])
+# Regular expression list for optional preprocessing (default: [])
 regex      = [
     r'blk_(|-)[0-9]+' , # block id
     r'(/|)([0-9]+\.){3}[0-9]+(:[0-9]+|)(:|)', # IP
@@ -19,11 +19,11 @@ st         = 0.5  # Similarity threshold
 depth      = 4  # Depth of all leaf nodes
 
 parser = Drain.LogParser(log_format, indir=input_dir, outdir=output_dir,  depth=depth, st=st, rex=regex)
-parser.parse(log_file) """
+parser.parse(log_file)
 
-minEventCount = 2 # The minimum number of events in a bin
+""" minEventCount = 2 # The minimum number of events in a bin
 merge_percent = 0.5 # The percentage of different tokens 
 regex         = [r'blk_-?\d+', r'(\d+\.){3}\d+(:\d+)?'] # Regular expression list for optional preprocessing (default: [])
 
 parser = AEL.LogParser(input_dir, output_dir, log_format, rex=regex, minEventCount=minEventCount, merge_percent=merge_percent)
-parser.parse(log_file) 
+parser.parse(log_file)  """

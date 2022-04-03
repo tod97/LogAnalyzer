@@ -1,22 +1,21 @@
 EventId,EventTemplate,Occurrences
-46003790,Received block <*> of size <*> from /<*>,82794
+e3df2680,Received block <*> of size <*> from <*>,82794
 dc2c74b7,PacketResponder <*> for block <*> terminating,82794
-bbb51b95,Receiving block <*> src: /<*> dest: /<*>,82287
+09a53393,Receiving block <*> src: <*> dest: <*>,82287
 5d5de21c,BLOCK* NameSystem.addStoredBlock: blockMap updated: <*> is added to <*> size <*>,79820
 3d91fa85,BLOCK* NameSystem.allocateBlock: <*> <*>,27551
 32777b38,Verification succeeded for <*>,25917
-758c42e9,BLOCK* NameSystem.addStoredBlock: Redundant addStoredBlock request received for <*> on <*> size 67108864,83
+c294d20f,BLOCK* NameSystem.addStoredBlock: Redundant addStoredBlock request received for <*> on <*> size <*>,84
 bcc910df,writeBlock <*> received exception java.io.IOException: Could not read from stream,121
-e943e3b4,BLOCK* NameSystem.addStoredBlock: Redundant addStoredBlock request received for <*> on <*> size 20383993,1
 728076ac,BLOCK* ask <*> to replicate <*> to datanode(s) <*>,4
 40651754,<*> Starting thread to transfer block <*> to <*>,4
-9c784e29,<*>:Transmitted block <*> to /<*>,11
-44614d71,Received block <*> src: /<*> dest: /<*> of size <*>,18
+73c2ec69,<*>Transmitted block <*> to <*>,11
+d6b7b743,Received block <*> src: <*> dest: <*> of size <*>,18
 dba996ef,Deleting block <*> file <*>,73101
 0567184d,Receiving empty packet for block <*>,9
 d63ef163,BLOCK* NameSystem.delete: <*> is added to invalidSet of <*>,201528
 75627efd,"<*> Starting thread to transfer block <*> to <*>, <*>",7
 54e5f6b4,BLOCK* ask <*> to replicate <*> to datanode(s) <*> <*>,7
-ab2ffdbc,BLOCK* NameSystem.addStoredBlock: addStoredBlock request received for <*> on <*> size 67108864 But it does not belong to any file.,3
-4dec0816,<*> Served block <*> to /<*>,67672
-a333d363,<*>:Got exception while serving <*> to /<*>:,32447
+8f2bc724,BLOCK* NameSystem.addStoredBlock: addStoredBlock request received for <*> on <*> size <*> But it does not belong to any file.,3
+626085d5,<*> Served block <*> to <*>,67672
+81cee340,<*>Got exception while serving <*> to <*>,32447
