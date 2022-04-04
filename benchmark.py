@@ -72,7 +72,7 @@ model_evaluate('MLP', model, x_te, y_test, x_train, y_train)
 
 #_model = 'Nearest Neighbors'
 x_train = feature_extractor.fit_transform(x_tr, term_weighting='tf-idf')
-model = NearestN(n_neighbors=100)
+model = NearestN()
 model.fit(x_train, y_train)
 model_evaluate('Nearest Neighbors', model, x_te, y_test, x_train, y_train)
 
