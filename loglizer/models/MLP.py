@@ -4,8 +4,8 @@ from ..utils import metrics
 
 class MLP(object):
 
-    def __init__(self, solver='lbfgs', alpha=1e-4, hidden_layer_sizes=(5, 2), random_state=1, max_iter=200, learning_rate_init=1e-3, verbose=False):
-        self.classifier = MLPClassifier(solver=solver, alpha=alpha, hidden_layer_sizes=hidden_layer_sizes, random_state=random_state, max_iter=max_iter, learning_rate_init=learning_rate_init)
+    def __init__(self, solver='lbfgs', alpha=1e-4, hidden_layer_sizes=(5, 2), random_state=1, max_iter=200, learning_rate_init=1e-3, tol=1e-4, verbose=False):
+        self.classifier = MLPClassifier(solver=solver, alpha=alpha, hidden_layer_sizes=hidden_layer_sizes, random_state=random_state, max_iter=max_iter, learning_rate_init=learning_rate_init, tol=tol)
         self.verbose = verbose
 
     def fit(self, X, y):

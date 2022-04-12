@@ -5,7 +5,7 @@ import sys
 import numpy
 numpy.set_printoptions(threshold=sys.maxsize)
 
-struct_log = './loghub/HDFS/HDFS_100k.log_structured.csv' # The structured log file
+struct_log = './loghub/HDFS/HDFS_100m.log_structured.csv' # The structured log file
 label_file = './loghub/HDFS/anomaly_label.csv' # The anomaly label file
 
 (x_train, y_train), (x_test, y_test) = dataloader.load_HDFS(struct_log, label_file=label_file, window='session',  train_ratio=0.5, split_type='uniform')
